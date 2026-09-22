@@ -100,20 +100,27 @@ nav{position:relative;z-index:50;display:flex;align-items:center;justify-content
 .sec-icon{width:30px;height:30px;object-fit:contain;image-rendering:pixelated;
   filter:drop-shadow(0 2px 6px rgba(0,0,0,.7));flex-shrink:0;}
 
-@keyframes secSlideFade {
-  0% { opacity: 0; transform: translateY(24px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-
-.sec-animate { animation: secSlideFade 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-.grid-animate { animation: secSlideFade 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-
 .pills{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;}
 .pill{font-family:'Press Start 2P',monospace;font-size:.6rem;padding:9px 15px;
   border:2px solid var(--card-border);background:rgba(20,26,64,.7);color:var(--muted);
   cursor:pointer;transition:all .15s ease;letter-spacing:.05em;}
 .pill:hover{border-color:var(--yellow);color:var(--yellow);transform:translateY(-1px);}
 .pill.on{border-color:var(--yellow);background:rgba(245,200,66,.15);color:var(--yellow);}
+
+/* SEARCH BAR STYLES */
+.search-box{position:relative;display:flex;align-items:center;margin-bottom:18px;width:100%;}
+.search-input{width:100%;font-family:'VT323',monospace;font-size:1.35rem;padding:12px 40px 12px 42px;
+  background:rgba(12,17,45,0.85);border:2px solid var(--card-border);color:var(--yellow);
+  outline:none;transition:border-color .15s,box-shadow .15s;letter-spacing:.05em;}
+.search-input::placeholder{color:var(--muted);font-family:'VT323',monospace;font-size:1.25rem;}
+.search-input:focus{border-color:var(--cyan);box-shadow:0 0 18px rgba(66,232,224,0.3);background:rgba(18,24,60,0.95);}
+.search-icon{position:absolute;left:14px;font-size:1.1rem;pointer-events:none;opacity:0.7;}
+.search-clear{position:absolute;right:14px;background:none;border:none;color:var(--muted);
+  font-family:'Press Start 2P',monospace;font-size:.65rem;cursor:pointer;padding:4px;transition:color .12s;}
+.search-clear:hover{color:var(--yellow);}
+.no-results{display:none;text-align:center;padding:40px 20px;background:var(--card-bg);
+  border:2px dashed var(--card-border);margin:24px 0;font-family:'Press Start 2P',monospace;
+  font-size:.7rem;color:var(--muted);line-height:2.2;}
 
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;}
 .card{position:relative;background:var(--card-bg);border:2px solid var(--card-border);
@@ -171,6 +178,13 @@ footer p{font-family:'VT323',monospace;font-size:1.1rem;color:var(--muted);line-
 </div>
 
 <div class="wrap">
+  <!-- Search Bar -->
+  <div class="search-box">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="search-input" class="search-input" placeholder="Search Minecraft PNGs (e.g., Diamond, Sword, TNT, Apple)..." oninput="onSearchInput()">
+    <button id="search-clear" class="search-clear" onclick="clearSearch()" style="display:none;">✕</button>
+  </div>
+
   <div class="pills">
     <button class="pill on" onclick="filt('all',this)">All</button>
     <button class="pill" onclick="filt('blocks',this)">Blocks</button>
@@ -178,6 +192,11 @@ footer p{font-family:'VT323',monospace;font-size:1.1rem;color:var(--muted);line-
     <button class="pill" onclick="filt('tools',this)">Tools</button>
     <button class="pill" onclick="filt('food',this)">Food</button>
     <button class="pill" onclick="filt('armor',this)">Armor</button>
+  </div>
+
+  <div id="no-results" class="no-results">
+    ⛏ NO MINECRAFT PNGs FOUND<br>
+    <span style="font-family:'VT323';font-size:1.2rem;color:var(--yellow)">Try searching for another item or clear your search query.</span>
   </div>
 
   <div id="sec-blocks" class="sec-hdr"><div class="sec-bar" style="background:var(--yellow)"></div><img class="sec-icon" id="si-blocks" src="" alt=""><h2>BLOCKS</h2><div class="sec-line"></div></div>
@@ -374,7 +393,6 @@ function render3DBlockCanvas(item, callback) {
     const w = imgSide.width || 16;
     const h = imgSide.height || 16;
 
-    // Tinted Top Face canvas for grass
     const topCv = document.createElement('canvas');
     topCv.width = w; topCv.height = h;
     const topCtx = topCv.getContext('2d');
@@ -389,7 +407,6 @@ function render3DBlockCanvas(item, callback) {
       topCtx.globalCompositeOperation = 'source-over';
     }
 
-    // Side Face canvas
     const sideCv = document.createElement('canvas');
     sideCv.width = w; sideCv.height = h;
     const sideCtx = sideCv.getContext('2d');
@@ -434,7 +451,6 @@ function render3DBlockCanvas(item, callback) {
       ctx.restore();
     }
 
-    // 3D Isometric Cube Projection
     drawFace(topCv, {x:64, y:16}, {x:104, y:38}, {x:24, y:38}, 1.0);
     drawFace(sideCv, {x:24, y:38}, {x:64, y:60}, {x:24, y:84}, 0.82);
     drawFace(sideCv, {x:64, y:60}, {x:104, y:38}, {x:64, y:106}, 0.62);
@@ -504,6 +520,8 @@ function makeCard(item, isBlock=false){
 }
 
 const CATS = Object.keys(DATA);
+let currentCat = 'all';
+let searchQuery = '';
 
 function setupHeroFloatInteractions(imgEl, item) {
   imgEl.title = `Click to interact with ${item.name}!`;
@@ -552,6 +570,79 @@ function setupHeroFloatInteractions(imgEl, item) {
   });
 }
 
+function renderHeroFloats() {
+  const hf = document.getElementById('hf');
+  if (!hf) return;
+  hf.innerHTML = '';
+  HERO_FLOATS.forEach(item => {
+    const img = document.createElement('img');
+    img.alt = item.name;
+    img.src = imgUrl(item.f);
+    if (item.isBlock) {
+      render3DBlockCanvas(item, (dataUrl) => { img.src = dataUrl; });
+    }
+    setupHeroFloatInteractions(img, item);
+    hf.appendChild(img);
+  });
+}
+
+function onSearchInput(){
+  const input = document.getElementById('search-input');
+  const clearBtn = document.getElementById('search-clear');
+  searchQuery = input.value.trim().toLowerCase();
+  clearBtn.style.display = searchQuery ? 'block' : 'none';
+  applyFilters();
+}
+
+function clearSearch(){
+  const input = document.getElementById('search-input');
+  input.value = '';
+  onSearchInput();
+}
+
+function applyFilters(){
+  let totalVisible = 0;
+  CATS.forEach(c => {
+    const isCatMatch = (currentCat === 'all' || currentCat === c || searchQuery !== '');
+    const sec = document.getElementById('sec-' + c);
+    const grid = document.getElementById('grid-' + c);
+
+    if (!grid) return;
+
+    let catVisibleCount = 0;
+    const cards = grid.children;
+    DATA[c].forEach((item, idx) => {
+      const card = cards[idx];
+      if (!card) return;
+      const matchesSearch = !searchQuery || item.name.toLowerCase().includes(searchQuery);
+      if (isCatMatch && matchesSearch) {
+        card.style.display = '';
+        catVisibleCount++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    const showSec = isCatMatch && catVisibleCount > 0;
+    if (sec) sec.style.display = showSec ? '' : 'none';
+    grid.style.display = showSec ? '' : 'none';
+
+    totalVisible += catVisibleCount;
+  });
+
+  const noRes = document.getElementById('no-results');
+  if (noRes) {
+    noRes.style.display = (totalVisible === 0) ? 'block' : 'none';
+  }
+}
+
+function filt(cat, btn){
+  document.querySelectorAll('.pill').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  currentCat = cat;
+  applyFilters();
+}
+
 function render(){
   Object.entries(SECTION_ICONS).forEach(([cat, f]) => {
     const el = document.getElementById('si-'+cat);
@@ -573,53 +664,8 @@ function render(){
     }
   });
 
-  const hf = document.getElementById('hf');
-  if(hf){
-    hf.innerHTML = '';
-    HERO_FLOATS.forEach((item, i) => {
-      const img = document.createElement('img');
-      img.alt = item.name;
-      img.style.cssText = `--fb:${(2.5+i*.28).toFixed(1)}s;animation-delay:${(i*.22).toFixed(1)}s`;
-
-      if(item.isBlock){
-        render3DBlockCanvas(item, (dataUrl) => { img.src = dataUrl; });
-      } else {
-        img.src = imgUrl(item.f);
-      }
-
-      img.onerror = () => img.remove();
-      setupHeroFloatInteractions(img, item);
-      hf.appendChild(img);
-    });
-  }
-}
-
-function filt(cat, btn){
-  document.querySelectorAll('.pill').forEach(b => b.classList.remove('on'));
-  btn.classList.add('on');
-
-  CATS.forEach(c => {
-    const show = (cat==='all' || cat===c);
-    const sec = document.getElementById('sec-'+c);
-    const grid = document.getElementById('grid-'+c);
-
-    if(sec) {
-      sec.style.display = show ? '' : 'none';
-      if(show){
-        sec.classList.remove('sec-animate');
-        void sec.offsetWidth;
-        sec.classList.add('sec-animate');
-      }
-    }
-    if(grid) {
-      grid.style.display = show ? '' : 'none';
-      if(show){
-        grid.classList.remove('grid-animate');
-        void grid.offsetWidth;
-        grid.classList.add('grid-animate');
-      }
-    }
-  });
+  renderHeroFloats();
+  applyFilters();
 }
 
 (function(){
