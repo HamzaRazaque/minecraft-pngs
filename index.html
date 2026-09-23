@@ -224,93 +224,303 @@ const T = 'https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets
 
 const DATA = {
   blocks:[
-    {name:'Grass Block',    f:'block/grass_block_side',    top:'block/grass_block_top', overlay:'block/grass_block_side_overlay', isGrass:true, c:'#f5c842'},
-    {name:'Dirt',           f:'block/dirt',                 c:'#f5c842'},
-    {name:'Stone',          f:'block/stone',                c:'#f5c842'},
-    {name:'Cobblestone',    f:'block/cobblestone',          c:'#f5c842'},
-    {name:'Oak Planks',     f:'block/oak_planks',           c:'#f5c842'},
-    {name:'Sand',           f:'block/sand',                 c:'#f5c842'},
-    {name:'Gravel',         f:'block/gravel',               c:'#f5c842'},
-    {name:'Diamond Block',  f:'block/diamond_block',        c:'#42e8e0'},
-    {name:'Gold Block',     f:'block/gold_block',           c:'#f5c842'},
-    {name:'Iron Block',     f:'block/iron_block',           c:'#f5c842'},
-    {name:'Netherite Block',f:'block/netherite_block',      c:'#b06ef3', n:true},
-    {name:'Obsidian',       f:'block/obsidian',             c:'#b06ef3'},
-    {name:'Crying Obsidian',f:'block/crying_obsidian',      c:'#b06ef3', n:true},
-    {name:'TNT',            f:'block/tnt_side',             top:'block/tnt_top', c:'#ff5555'},
-    {name:'Crafting Table', f:'block/crafting_table_front', top:'block/crafting_table_top', c:'#f5c842'},
-    {name:'Furnace',        f:'block/furnace_front',        top:'block/furnace_top', c:'#8899cc'},
-    {name:'Glowstone',      f:'block/glowstone',            c:'#f5c842', n:true},
-    {name:'Netherrack',     f:'block/netherrack',           c:'#ff7f50'},
-    {name:'Bookshelf',      f:'block/bookshelf',            top:'block/oak_planks', c:'#f5c842'},
-    {name:'Bricks',         f:'block/bricks',               c:'#ff7f50'},
-    {name:'Sponge',         f:'block/sponge',               c:'#f5c842'},
-    {name:'Bedrock',        f:'block/bedrock',              c:'#8899cc'},
-    {name:'Amethyst Block', f:'block/amethyst_block',       c:'#b06ef3', n:true},
+    {name:'Grass Block',            f:'block/grass_block_side',    top:'block/grass_block_top', overlay:'block/grass_block_side_overlay', isGrass:true, c:'#f5c842'},
+    {name:'Dirt',                   f:'block/dirt',                 c:'#f5c842'},
+    {name:'Coarse Dirt',            f:'block/coarse_dirt',          c:'#f5c842'},
+    {name:'Podzol',                 f:'block/podzol_side',          top:'block/podzol_top', c:'#f5c842'},
+    {name:'Mycelium',               f:'block/mycelium_side',        top:'block/mycelium_top', c:'#b06ef3'},
+    {name:'Stone',                  f:'block/stone',                c:'#f5c842'},
+    {name:'Smooth Stone',           f:'block/smooth_stone',         c:'#f5c842'},
+    {name:'Cobblestone',            f:'block/cobblestone',          c:'#f5c842'},
+    {name:'Mossy Cobblestone',      f:'block/mossy_cobblestone',    c:'#4cffb3'},
+    {name:'Stone Bricks',           f:'block/stone_bricks',         c:'#f5c842'},
+    {name:'Mossy Stone Bricks',     f:'block/mossy_stone_bricks',   c:'#4cffb3'},
+    {name:'Cracked Stone Bricks',   f:'block/cracked_stone_bricks', c:'#8899cc'},
+    {name:'Granite',                f:'block/granite',              c:'#ff7f50'},
+    {name:'Polished Granite',       f:'block/polished_granite',     c:'#ff7f50'},
+    {name:'Diorite',                f:'block/diorite',              c:'#d8d8d8'},
+    {name:'Polished Diorite',       f:'block/polished_diorite',     c:'#d8d8d8'},
+    {name:'Andesite',               f:'block/andesite',             c:'#8899cc'},
+    {name:'Polished Andesite',      f:'block/polished_andesite',    c:'#8899cc'},
+    {name:'Deepslate',              f:'block/deepslate',            c:'#8899cc'},
+    {name:'Cobbled Deepslate',      f:'block/cobbled_deepslate',    c:'#8899cc'},
+    {name:'Polished Deepslate',     f:'block/polished_deepslate',   c:'#8899cc'},
+    {name:'Deepslate Bricks',       f:'block/deepslate_bricks',     c:'#8899cc'},
+    {name:'Deepslate Tiles',        f:'block/deepslate_tiles',      c:'#8899cc'},
+    {name:'Reinforced Deepslate',   f:'block/reinforced_deepslate_side', top:'block/reinforced_deepslate_top', c:'#b06ef3'},
+    {name:'Oak Planks',             f:'block/oak_planks',           c:'#f5c842'},
+    {name:'Spruce Planks',          f:'block/spruce_planks',        c:'#f5c842'},
+    {name:'Birch Planks',           f:'block/birch_planks',         c:'#f5c842'},
+    {name:'Jungle Planks',          f:'block/jungle_planks',        c:'#ff7f50'},
+    {name:'Acacia Planks',          f:'block/acacia_planks',        c:'#ff7f50'},
+    {name:'Dark Oak Planks',        f:'block/dark_oak_planks',      c:'#f5c842'},
+    {name:'Mangrove Planks',        f:'block/mangrove_planks',      c:'#ff7f50'},
+    {name:'Cherry Planks',          f:'block/cherry_planks',        c:'#b06ef3', n:true},
+    {name:'Bamboo Planks',          f:'block/bamboo_planks',        c:'#f5c842', n:true},
+    {name:'Crimson Planks',         f:'block/crimson_planks',       c:'#b06ef3'},
+    {name:'Warped Planks',          f:'block/warped_planks',        c:'#42e8e0'},
+    {name:'Oak Log',                f:'block/oak_log',              top:'block/oak_log_top', c:'#f5c842'},
+    {name:'Spruce Log',             f:'block/spruce_log',           top:'block/spruce_log_top', c:'#f5c842'},
+    {name:'Birch Log',              f:'block/birch_log',            top:'block/birch_log_top', c:'#f5c842'},
+    {name:'Sand',                   f:'block/sand',                 c:'#f5c842'},
+    {name:'Red Sand',               f:'block/red_sand',             c:'#ff7f50'},
+    {name:'Gravel',                 f:'block/gravel',               c:'#f5c842'},
+    {name:'Coal Ore',               f:'block/coal_ore',             c:'#aaaaaa'},
+    {name:'Iron Ore',               f:'block/iron_ore',             c:'#d8d8d8'},
+    {name:'Gold Ore',               f:'block/gold_ore',             c:'#f5c842'},
+    {name:'Redstone Ore',           f:'block/redstone_ore',         c:'#ff5555'},
+    {name:'Lapis Ore',              f:'block/lapis_ore',            c:'#a8c0ff'},
+    {name:'Diamond Ore',            f:'block/diamond_ore',          c:'#42e8e0'},
+    {name:'Emerald Ore',            f:'block/emerald_ore',          c:'#4cffb3'},
+    {name:'Copper Ore',             f:'block/copper_ore',           c:'#ff7f50'},
+    {name:'Deepslate Diamond Ore',  f:'block/deepslate_diamond_ore',c:'#42e8e0'},
+    {name:'Deepslate Gold Ore',     f:'block/deepslate_gold_ore',   c:'#f5c842'},
+    {name:'Deepslate Iron Ore',     f:'block/deepslate_iron_ore',   c:'#d8d8d8'},
+    {name:'Deepslate Emerald Ore',  f:'block/deepslate_emerald_ore',c:'#4cffb3'},
+    {name:'Diamond Block',          f:'block/diamond_block',        c:'#42e8e0'},
+    {name:'Gold Block',             f:'block/gold_block',           c:'#f5c842'},
+    {name:'Iron Block',             f:'block/iron_block',           c:'#f5c842'},
+    {name:'Emerald Block',          f:'block/emerald_block',        c:'#4cffb3'},
+    {name:'Redstone Block',         f:'block/redstone_block',       c:'#ff5555'},
+    {name:'Lapis Block',            f:'block/lapis_block',          c:'#a8c0ff'},
+    {name:'Coal Block',             f:'block/coal_block',           c:'#aaaaaa'},
+    {name:'Netherite Block',        f:'block/netherite_block',      c:'#b06ef3', n:true},
+    {name:'Copper Block',           f:'block/copper_block',         c:'#ff7f50'},
+    {name:'Raw Iron Block',         f:'block/raw_iron_block',       c:'#d8d8d8'},
+    {name:'Raw Gold Block',         f:'block/raw_gold_block',       c:'#f5c842'},
+    {name:'Raw Copper Block',       f:'block/raw_copper_block',     c:'#ff7f50'},
+    {name:'Obsidian',               f:'block/obsidian',             c:'#b06ef3'},
+    {name:'Crying Obsidian',        f:'block/crying_obsidian',      c:'#b06ef3', n:true},
+    {name:'Bedrock',                f:'block/bedrock',              c:'#8899cc'},
+    {name:'Glass',                  f:'block/glass',                c:'#42e8e0'},
+    {name:'Tinted Glass',           f:'block/tinted_glass',         c:'#b06ef3', n:true},
+    {name:'TNT',                    f:'block/tnt_side',             top:'block/tnt_top', c:'#ff5555'},
+    {name:'Crafting Table',         f:'block/crafting_table_front', side:'block/crafting_table_side', top:'block/crafting_table_top', c:'#f5c842'},
+    {name:'Furnace',                f:'block/furnace_front',        side:'block/furnace_side', top:'block/furnace_top', c:'#8899cc'},
+    {name:'Blast Furnace',          f:'block/blast_furnace_front',  side:'block/blast_furnace_side', top:'block/blast_furnace_top', c:'#8899cc', n:true},
+    {name:'Smoker',                 f:'block/smoker_front',         side:'block/smoker_side', top:'block/smoker_top', c:'#ff7f50', n:true},
+    {name:'Barrel',                 f:'block/barrel_side',          top:'block/barrel_top', c:'#f5c842'},
+    {name:'Bookshelf',              f:'block/bookshelf',            top:'block/oak_planks', c:'#f5c842'},
+    {name:'Chiseled Bookshelf',     f:'block/chiseled_bookshelf_empty', top:'block/oak_planks', c:'#f5c842', n:true},
+    {name:'Bricks',                 f:'block/bricks',               c:'#ff7f50'},
+    {name:'Nether Bricks',          f:'block/nether_bricks',        c:'#b06ef3'},
+    {name:'Red Nether Bricks',      f:'block/red_nether_bricks',    c:'#ff5555'},
+    {name:'Sponge',                 f:'block/sponge',               c:'#f5c842'},
+    {name:'Wet Sponge',             f:'block/wet_sponge',           c:'#42e8e0'},
+    {name:'Glowstone',              f:'block/glowstone',            c:'#f5c842', n:true},
+    {name:'Sea Lantern',            f:'block/sea_lantern',          c:'#42e8e0'},
+    {name:'Prismarine',             f:'block/prismarine',           c:'#42e8e0'},
+    {name:'Prismarine Bricks',      f:'block/prismarine_bricks',    c:'#42e8e0'},
+    {name:'Dark Prismarine',        f:'block/dark_prismarine',      c:'#4cffb3'},
+    {name:'Netherrack',             f:'block/netherrack',           c:'#ff7f50'},
+    {name:'Soul Sand',              f:'block/soul_sand',            c:'#ff7f50'},
+    {name:'Soul Soil',              f:'block/soul_soil',            c:'#ff7f50'},
+    {name:'Basalt',                 f:'block/basalt_side',          top:'block/basalt_top', c:'#8899cc'},
+    {name:'Smooth Basalt',          f:'block/smooth_basalt',        c:'#8899cc'},
+    {name:'End Stone',              f:'block/end_stone',            c:'#f5c842'},
+    {name:'End Stone Bricks',       f:'block/end_stone_bricks',     c:'#f5c842'},
+    {name:'Purpur Block',           f:'block/purpur_block',         c:'#b06ef3'},
+    {name:'Amethyst Block',         f:'block/amethyst_block',       c:'#b06ef3', n:true},
+    {name:'Budding Amethyst',       f:'block/budding_amethyst',     c:'#b06ef3', n:true},
+    {name:'Calcite',                f:'block/calcite',              c:'#d8d8d8'},
+    {name:'Tuff',                   f:'block/tuff',                 c:'#8899cc'},
+    {name:'Polished Tuff',          f:'block/polished_tuff',        c:'#8899cc', n:true},
+    {name:'Tuff Bricks',            f:'block/tuff_bricks',          c:'#8899cc', n:true},
+    {name:'Chiseled Tuff',          f:'block/chiseled_tuff',        c:'#8899cc', n:true},
+    {name:'Mud',                    f:'block/mud',                  c:'#ff7f50'},
+    {name:'Mud Bricks',             f:'block/mud_bricks',           c:'#ff7f50'},
+    {name:'Sculk',                  f:'block/sculk',                c:'#42e8e0', n:true},
+    {name:'Sculk Catalyst',         f:'block/sculk_catalyst_side',  top:'block/sculk_catalyst_top', c:'#42e8e0', n:true},
+    {name:'Ochre Froglight',        f:'block/ochre_froglight_side', top:'block/ochre_froglight_top', c:'#f5c842', n:true},
+    {name:'Verdant Froglight',      f:'block/verdant_froglight_side', top:'block/verdant_froglight_top', c:'#4cffb3', n:true},
+    {name:'Pearlescent Froglight',  f:'block/pearlescent_froglight_side', top:'block/pearlescent_froglight_top', c:'#b06ef3', n:true},
   ],
   items:[
-    {name:'Diamond',          f:'item/diamond',          c:'#42e8e0'},
-    {name:'Emerald',          f:'item/emerald',          c:'#4cffb3'},
-    {name:'Gold Ingot',       f:'item/gold_ingot',       c:'#f5c842'},
-    {name:'Iron Ingot',       f:'item/iron_ingot',       c:'#d8d8d8'},
-    {name:'Netherite Ingot',  f:'item/netherite_ingot',  c:'#b06ef3', n:true},
-    {name:'Coal',             f:'item/coal',             c:'#aaaaaa'},
-    {name:'Redstone',         f:'item/redstone',         c:'#ff5555'},
-    {name:'Ender Pearl',      f:'item/ender_pearl',      c:'#b06ef3'},
-    {name:'Eye of Ender',     f:'item/ender_eye',        c:'#4cffb3', n:true},
-    {name:'Blaze Rod',        f:'item/blaze_rod',        c:'#f5c842', n:true},
-    {name:'Nether Star',      f:'item/nether_star',      c:'#a8c0ff'},
-    {name:'Totem of Undying', f:'item/totem_of_undying', c:'#f5c842', n:true},
-    {name:'Name Tag',         f:'item/name_tag',         c:'#42e8e0'},
-    {name:'Compass',          f:'item/compass_16',       c:'#42e8e0'},
-    {name:'Clock',            f:'item/clock_00',         c:'#f5c842'},
-    {name:'Book',             f:'item/book',             c:'#f5c842'},
-    {name:'Enchanted Book',   f:'item/enchanted_book',   c:'#b06ef3', n:true},
-    {name:'Experience Bottle',f:'item/experience_bottle',c:'#4cffb3', n:true},
+    {name:'Diamond',            f:'item/diamond',           c:'#42e8e0'},
+    {name:'Emerald',            f:'item/emerald',           c:'#4cffb3'},
+    {name:'Gold Ingot',         f:'item/gold_ingot',        c:'#f5c842'},
+    {name:'Iron Ingot',         f:'item/iron_ingot',        c:'#d8d8d8'},
+    {name:'Copper Ingot',       f:'item/copper_ingot',      c:'#ff7f50'},
+    {name:'Netherite Ingot',    f:'item/netherite_ingot',   c:'#b06ef3', n:true},
+    {name:'Netherite Scrap',    f:'item/netherite_scrap',   c:'#b06ef3', n:true},
+    {name:'Raw Iron',           f:'item/raw_iron',          c:'#d8d8d8'},
+    {name:'Raw Gold',           f:'item/raw_gold',          c:'#f5c842'},
+    {name:'Raw Copper',         f:'item/raw_copper',        c:'#ff7f50'},
+    {name:'Coal',               f:'item/coal',              c:'#aaaaaa'},
+    {name:'Charcoal',           f:'item/charcoal',          c:'#aaaaaa'},
+    {name:'Redstone',           f:'item/redstone',          c:'#ff5555'},
+    {name:'Lapis Lazuli',       f:'item/lapis_lazuli',      c:'#a8c0ff'},
+    {name:'Quartz',             f:'item/quartz',            c:'#d8d8d8'},
+    {name:'Amethyst Shard',     f:'item/amethyst_shard',    c:'#b06ef3', n:true},
+    {name:'Flint',              f:'item/flint',             c:'#aaaaaa'},
+    {name:'Stick',              f:'item/stick',             c:'#f5c842'},
+    {name:'Feather',            f:'item/feather',           c:'#d8d8d8'},
+    {name:'String',             f:'item/string',            c:'#d8d8d8'},
+    {name:'Gunpowder',          f:'item/gunpowder',         c:'#aaaaaa'},
+    {name:'Glowstone Dust',     f:'item/glowstone_dust',    c:'#f5c842'},
+    {name:'Blaze Powder',       f:'item/blaze_powder',      c:'#f5c842', n:true},
+    {name:'Blaze Rod',          f:'item/blaze_rod',         c:'#f5c842', n:true},
+    {name:'Ender Pearl',        f:'item/ender_pearl',       c:'#b06ef3'},
+    {name:'Eye of Ender',       f:'item/ender_eye',         c:'#4cffb3', n:true},
+    {name:'Nether Star',        f:'item/nether_star',       c:'#a8c0ff'},
+    {name:'Totem of Undying',   f:'item/totem_of_undying',  c:'#f5c842', n:true},
+    {name:'Leather',            f:'item/leather',           c:'#ff7f50'},
+    {name:'Clay Ball',          f:'item/clay_ball',         c:'#8899cc'},
+    {name:'Brick',              f:'item/brick',             c:'#ff7f50'},
+    {name:'Nether Brick',       f:'item/netherbrick',       c:'#b06ef3'},
+    {name:'Prismarine Shard',   f:'item/prismarine_shard',  c:'#42e8e0'},
+    {name:'Prismarine Crystals',f:'item/prismarine_crystals',c:'#42e8e0'},
+    {name:'Heart of the Sea',   f:'item/heart_of_the_sea',  c:'#42e8e0', n:true},
+    {name:'Nautilus Shell',     f:'item/nautilus_shell',    c:'#a8c0ff'},
+    {name:'Shulker Shell',      f:'item/shulker_shell',     c:'#b06ef3'},
+    {name:'Magma Cream',        f:'item/magma_cream',       c:'#ff7f50'},
+    {name:'Ghast Tear',         f:'item/ghast_tear',        c:'#d8d8d8'},
+    {name:'Phantom Membrane',   f:'item/phantom_membrane',  c:'#42e8e0'},
+    {name:'Honeycomb',          f:'item/honeycomb',         c:'#f5c842'},
+    {name:'Echo Shard',         f:'item/echo_shard',        c:'#42e8e0', n:true},
+    {name:'Disc Fragment 5',    f:'item/disc_fragment_5',   c:'#42e8e0', n:true},
+    {name:'Breeze Rod',         f:'item/breeze_rod',        c:'#42e8e0', n:true},
+    {name:'Heavy Core',         f:'item/heavy_core',        c:'#8899cc', n:true},
+    {name:'Wind Charge',        f:'item/wind_charge',       c:'#42e8e0', n:true},
+    {name:'Name Tag',           f:'item/name_tag',          c:'#42e8e0'},
+    {name:'Compass',            f:'item/compass_16',        c:'#42e8e0'},
+    {name:'Clock',              f:'item/clock_00',          c:'#f5c842'},
+    {name:'Recovery Compass',   f:'item/recovery_compass_16', c:'#42e8e0', n:true},
+    {name:'Lead',               f:'item/lead',              c:'#f5c842'},
+    {name:'Book',               f:'item/book',              c:'#f5c842'},
+    {name:'Enchanted Book',     f:'item/enchanted_book',    c:'#b06ef3', n:true},
+    {name:'Writable Book',     f:'item/writable_book',    c:'#f5c842'},
+    {name:'Written Book',      f:'item/written_book',     c:'#f5c842'},
+    {name:'Experience Bottle',  f:'item/experience_bottle', c:'#4cffb3', n:true},
+    {name:'Firework Rocket',    f:'item/firework_rocket',   c:'#ff5555'},
+    {name:'Firework Star',      f:'item/firework_star',     c:'#f5c842'},
+    {name:'Bowl',               f:'item/bowl',              c:'#f5c842'},
+    {name:'Bucket',             f:'item/bucket',            c:'#d8d8d8'},
+    {name:'Water Bucket',       f:'item/water_bucket',      c:'#42e8e0'},
+    {name:'Lava Bucket',        f:'item/lava_bucket',       c:'#ff7f50'},
+    {name:'Milk Bucket',        f:'item/milk_bucket',       c:'#d8d8d8'},
+    {name:'Powder Snow Bucket', f:'item/powder_snow_bucket',c:'#d8d8d8', n:true},
+    {name:'Axolotl Bucket',     f:'item/axolotl_bucket',    c:'#b06ef3', n:true},
+    {name:'Tadpole Bucket',     f:'item/tadpole_bucket',    c:'#4cffb3', n:true},
+    {name:'Music Disc 13',      f:'item/music_disc_13',     c:'#f5c842'},
+    {name:'Music Disc Cat',     f:'item/music_disc_cat',    c:'#4cffb3'},
+    {name:'Music Disc Blocks',  f:'item/music_disc_blocks', c:'#ff7f50'},
+    {name:'Music Disc Chirp',   f:'item/music_disc_chirp',  c:'#ff5555'},
+    {name:'Music Disc Far',     f:'item/music_disc_far',    c:'#4cffb3'},
+    {name:'Music Disc Mall',    f:'item/music_disc_mall',   c:'#b06ef3'},
+    {name:'Music Disc Mellohi', f:'item/music_disc_mellohi',c:'#b06ef3'},
+    {name:'Music Disc Stal',    f:'item/music_disc_stal',   c:'#aaaaaa'},
+    {name:'Music Disc Strad',   f:'item/music_disc_strad',  c:'#d8d8d8'},
+    {name:'Music Disc Ward',    f:'item/music_disc_ward',   c:'#4cffb3'},
+    {name:'Music Disc 11',      f:'item/music_disc_11',     c:'#aaaaaa'},
+    {name:'Music Disc Wait',    f:'item/music_disc_wait',   c:'#42e8e0'},
+    {name:'Music Disc Pigstep', f:'item/music_disc_pigstep',c:'#ff7f50', n:true},
+    {name:'Music Disc Otherside',f:'item/music_disc_otherside',c:'#42e8e0', n:true},
+    {name:'Music Disc Relic',   f:'item/music_disc_relic',  c:'#ff7f50', n:true},
+    {name:'Music Disc Creator', f:'item/music_disc_creator',c:'#f5c842', n:true},
+    {name:'Music Disc Precipice',f:'item/music_disc_precipice',c:'#8899cc', n:true},
   ],
   tools:[
-    {name:'Netherite Sword',   f:'item/netherite_sword',   c:'#b06ef3', n:true},
-    {name:'Diamond Sword',    f:'item/diamond_sword',    c:'#42e8e0'},
-    {name:'Diamond Pickaxe',  f:'item/diamond_pickaxe',  c:'#42e8e0'},
-    {name:'Diamond Axe',      f:'item/diamond_axe',      c:'#42e8e0'},
-    {name:'Diamond Shovel',   f:'item/diamond_shovel',   c:'#42e8e0'},
-    {name:'Diamond Hoe',      f:'item/diamond_hoe',      c:'#42e8e0'},
-    {name:'Netherite Pickaxe',f:'item/netherite_pickaxe',c:'#b06ef3', n:true},
-    {name:'Iron Sword',       f:'item/iron_sword',       c:'#d8d8d8'},
-    {name:'Iron Pickaxe',     f:'item/iron_pickaxe',     c:'#d8d8d8'},
-    {name:'Bow',              f:'item/bow',              c:'#f5c842'},
-    {name:'Crossbow',         f:'item/crossbow_standby', c:'#f5c842', n:true},
-    {name:'Fishing Rod',      f:'item/fishing_rod',      c:'#4cffb3'},
-    {name:'Shears',           f:'item/shears',           c:'#d8d8d8'},
-    {name:'Trident',          f:'item/trident',          c:'#42e8e0'},
-    {name:'Flint & Steel',    f:'item/flint_and_steel',  c:'#aaaaaa'},
-    {name:'Spyglass',         f:'item/spyglass',         c:'#f5c842', n:true},
-    {name:'Mace',             f:'item/mace',             c:'#a8c0ff', n:true},
+    {name:'Wooden Sword',       f:'item/wooden_sword',      c:'#f5c842'},
+    {name:'Wooden Pickaxe',     f:'item/wooden_pickaxe',    c:'#f5c842'},
+    {name:'Wooden Axe',         f:'item/wooden_axe',        c:'#f5c842'},
+    {name:'Wooden Shovel',      f:'item/wooden_shovel',     c:'#f5c842'},
+    {name:'Wooden Hoe',         f:'item/wooden_hoe',        c:'#f5c842'},
+    {name:'Stone Sword',        f:'item/stone_sword',       c:'#8899cc'},
+    {name:'Stone Pickaxe',      f:'item/stone_pickaxe',     c:'#8899cc'},
+    {name:'Stone Axe',          f:'item/stone_axe',         c:'#8899cc'},
+    {name:'Stone Shovel',       f:'item/stone_shovel',      c:'#8899cc'},
+    {name:'Stone Hoe',          f:'item/stone_hoe',         c:'#8899cc'},
+    {name:'Iron Sword',         f:'item/iron_sword',        c:'#d8d8d8'},
+    {name:'Iron Pickaxe',       f:'item/iron_pickaxe',      c:'#d8d8d8'},
+    {name:'Iron Axe',           f:'item/iron_axe',          c:'#d8d8d8'},
+    {name:'Iron Shovel',        f:'item/iron_shovel',       c:'#d8d8d8'},
+    {name:'Iron Hoe',           f:'item/iron_hoe',          c:'#d8d8d8'},
+    {name:'Golden Sword',       f:'item/golden_sword',      c:'#f5c842'},
+    {name:'Golden Pickaxe',     f:'item/golden_pickaxe',    c:'#f5c842'},
+    {name:'Golden Axe',         f:'item/golden_axe',        c:'#f5c842'},
+    {name:'Golden Shovel',      f:'item/golden_shovel',     c:'#f5c842'},
+    {name:'Golden Hoe',         f:'item/golden_hoe',        c:'#f5c842'},
+    {name:'Diamond Sword',      f:'item/diamond_sword',     c:'#42e8e0'},
+    {name:'Diamond Pickaxe',    f:'item/diamond_pickaxe',   c:'#42e8e0'},
+    {name:'Diamond Axe',        f:'item/diamond_axe',       c:'#42e8e0'},
+    {name:'Diamond Shovel',     f:'item/diamond_shovel',    c:'#42e8e0'},
+    {name:'Diamond Hoe',        f:'item/diamond_hoe',       c:'#42e8e0'},
+    {name:'Netherite Sword',    f:'item/netherite_sword',   c:'#b06ef3', n:true},
+    {name:'Netherite Pickaxe',  f:'item/netherite_pickaxe', c:'#b06ef3', n:true},
+    {name:'Netherite Axe',      f:'item/netherite_axe',     c:'#b06ef3', n:true},
+    {name:'Netherite Shovel',   f:'item/netherite_shovel',  c:'#b06ef3', n:true},
+    {name:'Netherite Hoe',      f:'item/netherite_hoe',     c:'#b06ef3', n:true},
+    {name:'Wooden Spear',       f:'item/wooden_spear',      c:'#f5c842', n:true},
+    {name:'Stone Spear',        f:'item/stone_spear',       c:'#8899cc', n:true},
+    {name:'Copper Spear',       f:'item/copper_spear',      c:'#ff7f50', n:true},
+    {name:'Iron Spear',         f:'item/iron_spear',        c:'#d8d8d8', n:true},
+    {name:'Golden Spear',       f:'item/golden_spear',      c:'#f5c842', n:true},
+    {name:'Diamond Spear',      f:'item/diamond_spear',     c:'#42e8e0', n:true},
+    {name:'Netherite Spear',    f:'item/netherite_spear',   c:'#b06ef3', n:true},
+    {name:'Bow',                f:'item/bow',               c:'#f5c842'},
+    {name:'Crossbow',           f:'item/crossbow_standby',  c:'#f5c842', n:true},
+    {name:'Arrow',              f:'item/arrow',             c:'#d8d8d8'},
+    {name:'Spectral Arrow',     f:'item/spectral_arrow',    c:'#f5c842'},
+    {name:'Trident',            f:'item/trident',           c:'#42e8e0'},
+    {name:'Shield',             f:'item/shield',            c:'#f5c842'},
+    {name:'Mace',               f:'item/mace',              c:'#a8c0ff', n:true},
+    {name:'Fishing Rod',        f:'item/fishing_rod',       c:'#4cffb3'},
+    {name:'Carrot on a Stick',  f:'item/carrot_on_a_stick', c:'#ff7f50'},
+    {name:'Warped Fungus on a Stick', f:'item/warped_fungus_on_a_stick', c:'#42e8e0'},
+    {name:'Flint & Steel',      f:'item/flint_and_steel',   c:'#aaaaaa'},
+    {name:'Shears',             f:'item/shears',            c:'#d8d8d8'},
+    {name:'Brush',              f:'item/brush',             c:'#f5c842', n:true},
+    {name:'Spyglass',           f:'item/spyglass',          c:'#f5c842', n:true},
   ],
   food:[
     {name:'Apple',                 f:'item/apple',                 c:'#ff4444'},
     {name:'Golden Apple',          f:'item/golden_apple',          c:'#f5c842'},
+    {name:'Mushroom Stew',         f:'item/mushroom_stew',         c:'#ff7f50'},
     {name:'Bread',                 f:'item/bread',                 c:'#ff7f50'},
-    {name:'Cooked Beef',           f:'item/cooked_beef',           c:'#ff7f50'},
+    {name:'Raw Porkchop',          f:'item/porkchop',              c:'#ff7f50'},
     {name:'Cooked Porkchop',       f:'item/cooked_porkchop',       c:'#ff7f50'},
+    {name:'Raw Beef',              f:'item/beef',                  c:'#ff4444'},
+    {name:'Cooked Beef',           f:'item/cooked_beef',           c:'#ff7f50'},
+    {name:'Raw Chicken',           f:'item/chicken',               c:'#ff7f50'},
     {name:'Cooked Chicken',        f:'item/cooked_chicken',        c:'#ff7f50'},
-    {name:'Golden Carrot',         f:'item/golden_carrot',         c:'#f5c842', n:true},
-    {name:'Carrot',                f:'item/carrot',                c:'#ff7f50'},
-    {name:'Potato',                f:'item/potato',                c:'#f5c842'},
-    {name:'Cookie',                f:'item/cookie',                c:'#ff7f50'},
+    {name:'Raw Mutton',            f:'item/mutton',                c:'#ff4444'},
+    {name:'Cooked Mutton',         f:'item/cooked_mutton',         c:'#ff7f50'},
+    {name:'Raw Rabbit',            f:'item/rabbit',                c:'#ff7f50'},
+    {name:'Cooked Rabbit',         f:'item/cooked_rabbit',         c:'#ff7f50'},
+    {name:'Rabbit Stew',           f:'item/rabbit_stew',           c:'#ff7f50'},
+    {name:'Raw Cod',               f:'item/cod',                   c:'#42e8e0'},
+    {name:'Cooked Cod',            f:'item/cooked_cod',            c:'#ff7f50'},
+    {name:'Raw Salmon',            f:'item/salmon',                c:'#ff4444'},
+    {name:'Cooked Salmon',         f:'item/cooked_salmon',         c:'#ff7f50'},
+    {name:'Tropical Fish',         f:'item/tropical_fish',         c:'#ff7f50'},
+    {name:'Pufferfish',            f:'item/pufferfish',           c:'#f5c842'},
     {name:'Melon Slice',           f:'item/melon_slice',           c:'#4cffb3', n:true},
-    {name:'Pumpkin Pie',           f:'item/pumpkin_pie',           c:'#ff7f50'},
+    {name:'Dried Kelp',            f:'item/dried_kelp',            c:'#4cffb3'},
+    {name:'Carrot',                f:'item/carrot',                c:'#ff7f50'},
+    {name:'Golden Carrot',         f:'item/golden_carrot',         c:'#f5c842', n:true},
+    {name:'Potato',                f:'item/potato',                c:'#f5c842'},
+    {name:'Baked Potato',          f:'item/baked_potato',          c:'#ff7f50'},
+    {name:'Poisonous Potato',      f:'item/poisonous_potato',      c:'#4cffb3'},
+    {name:'Beetroot',              f:'item/beetroot',              c:'#ff4444'},
+    {name:'Beetroot Soup',         f:'item/beetroot_soup',         c:'#ff4444'},
     {name:'Sweet Berries',         f:'item/sweet_berries',         c:'#ff4444'},
+    {name:'Glow Berries',          f:'item/glow_berries',          c:'#f5c842', n:true},
+    {name:'Cookie',                f:'item/cookie',                c:'#ff7f50'},
+    {name:'Pumpkin Pie',           f:'item/pumpkin_pie',           c:'#ff7f50'},
+    {name:'Honey Bottle',          f:'item/honey_bottle',          c:'#f5c842'},
+    {name:'Chorus Fruit',          f:'item/chorus_fruit',          c:'#b06ef3'},
+    {name:'Popped Chorus Fruit',   f:'item/popped_chorus_fruit',   c:'#b06ef3'},
   ],
   armor:[
-    {name:'Netherite Helmet',    f:'item/netherite_helmet',    c:'#b06ef3', n:true},
-    {name:'Netherite Chestplate',f:'item/netherite_chestplate',c:'#b06ef3', n:true},
-    {name:'Netherite Leggings',  f:'item/netherite_leggings',  c:'#b06ef3', n:true},
-    {name:'Netherite Boots',     f:'item/netherite_boots',     c:'#b06ef3', n:true},
-    {name:'Diamond Helmet',      f:'item/diamond_helmet',      c:'#42e8e0'},
-    {name:'Diamond Chestplate',  f:'item/diamond_chestplate',  c:'#42e8e0'},
-    {name:'Diamond Leggings',    f:'item/diamond_leggings',    c:'#42e8e0'},
-    {name:'Diamond Boots',       f:'item/diamond_boots',       c:'#42e8e0'},
+    {name:'Leather Cap',         f:'item/leather_helmet',      c:'#ff7f50'},
+    {name:'Leather Tunic',       f:'item/leather_chestplate',  c:'#ff7f50'},
+    {name:'Leather Pants',       f:'item/leather_leggings',    c:'#ff7f50'},
+    {name:'Leather Boots',       f:'item/leather_boots',       c:'#ff7f50'},
+    {name:'Chainmail Helmet',    f:'item/chainmail_helmet',    c:'#aaaaaa'},
+    {name:'Chainmail Chestplate',f:'item/chainmail_chestplate',c:'#aaaaaa'},
+    {name:'Chainmail Leggings',  f:'item/chainmail_leggings',  c:'#aaaaaa'},
+    {name:'Chainmail Boots',     f:'item/chainmail_boots',     c:'#aaaaaa'},
     {name:'Iron Helmet',         f:'item/iron_helmet',         c:'#d8d8d8'},
     {name:'Iron Chestplate',     f:'item/iron_chestplate',     c:'#d8d8d8'},
     {name:'Iron Leggings',       f:'item/iron_leggings',       c:'#d8d8d8'},
@@ -319,16 +529,17 @@ const DATA = {
     {name:'Golden Chestplate',   f:'item/golden_chestplate',   c:'#f5c842'},
     {name:'Golden Leggings',     f:'item/golden_leggings',     c:'#f5c842'},
     {name:'Golden Boots',        f:'item/golden_boots',        c:'#f5c842'},
-    {name:'Chainmail Helmet',    f:'item/chainmail_helmet',    c:'#aaaaaa'},
-    {name:'Chainmail Chestplate',f:'item/chainmail_chestplate',c:'#aaaaaa'},
-    {name:'Chainmail Leggings',  f:'item/chainmail_leggings',  c:'#aaaaaa'},
-    {name:'Chainmail Boots',     f:'item/chainmail_boots',     c:'#aaaaaa'},
-    {name:'Leather Cap',         f:'item/leather_helmet',      c:'#ff7f50'},
-    {name:'Leather Tunic',       f:'item/leather_chestplate',  c:'#ff7f50'},
-    {name:'Leather Pants',       f:'item/leather_leggings',    c:'#ff7f50'},
-    {name:'Leather Boots',       f:'item/leather_boots',       c:'#ff7f50'},
+    {name:'Diamond Helmet',      f:'item/diamond_helmet',      c:'#42e8e0'},
+    {name:'Diamond Chestplate',  f:'item/diamond_chestplate',  c:'#42e8e0'},
+    {name:'Diamond Leggings',    f:'item/diamond_leggings',    c:'#42e8e0'},
+    {name:'Diamond Boots',       f:'item/diamond_boots',       c:'#42e8e0'},
+    {name:'Netherite Helmet',    f:'item/netherite_helmet',    c:'#b06ef3', n:true},
+    {name:'Netherite Chestplate',f:'item/netherite_chestplate',c:'#b06ef3', n:true},
+    {name:'Netherite Leggings',  f:'item/netherite_leggings',  c:'#b06ef3', n:true},
+    {name:'Netherite Boots',     f:'item/netherite_boots',     c:'#b06ef3', n:true},
     {name:'Turtle Shell',        f:'item/turtle_helmet',       c:'#4cffb3', n:true},
     {name:'Elytra',              f:'item/elytra',              c:'#a8c0ff', n:true},
+    {name:'Wolf Armor',          f:'item/wolf_armor',          c:'#8899cc', n:true},
   ]
 };
 
@@ -360,10 +571,11 @@ function dlIcon(c){
 const BLOCK_3D_CACHE = {};
 
 function render3DBlockCanvas(item, callback) {
-  const sideSrc = imgUrl(item.f);
+  const frontSrc = imgUrl(item.f);
+  const sideSrc = imgUrl(item.side || item.f);
   const topSrc = imgUrl(item.top || item.f);
   const overlaySrc = item.overlay ? imgUrl(item.overlay) : null;
-  const cacheKey = sideSrc + '|' + topSrc + '|' + (overlaySrc||'');
+  const cacheKey = frontSrc + '|' + sideSrc + '|' + topSrc + '|' + (overlaySrc||'');
 
   if (BLOCK_3D_CACHE[cacheKey]) {
     callback(BLOCK_3D_CACHE[cacheKey]);
@@ -377,11 +589,13 @@ function render3DBlockCanvas(item, callback) {
   ctx.imageSmoothingEnabled = false;
 
   let loaded = 0;
-  const total = overlaySrc ? 3 : 2;
+  const total = 3 + (overlaySrc ? 1 : 0);
+  const imgFront = new Image();
   const imgSide = new Image();
   const imgTop = new Image();
   const imgOverlay = new Image();
 
+  imgFront.crossOrigin = 'anonymous';
   imgSide.crossOrigin = 'anonymous';
   imgTop.crossOrigin = 'anonymous';
   imgOverlay.crossOrigin = 'anonymous';
@@ -390,8 +604,8 @@ function render3DBlockCanvas(item, callback) {
     loaded++;
     if (loaded < total) return;
 
-    const w = imgSide.width || 16;
-    const h = imgSide.height || 16;
+    const w = imgFront.width || 16;
+    const h = imgFront.height || 16;
 
     const topCv = document.createElement('canvas');
     topCv.width = w; topCv.height = h;
@@ -406,6 +620,11 @@ function render3DBlockCanvas(item, callback) {
       topCtx.drawImage(imgTop, 0, 0);
       topCtx.globalCompositeOperation = 'source-over';
     }
+
+    const frontCv = document.createElement('canvas');
+    frontCv.width = w; frontCv.height = h;
+    const frontCtx = frontCv.getContext('2d');
+    frontCtx.drawImage(imgFront, 0, 0);
 
     const sideCv = document.createElement('canvas');
     sideCv.width = w; sideCv.height = h;
@@ -423,6 +642,7 @@ function render3DBlockCanvas(item, callback) {
       ovCtx.globalCompositeOperation = 'destination-in';
       ovCtx.drawImage(imgOverlay, 0, 0);
 
+      frontCtx.drawImage(ovCv, 0, 0);
       sideCtx.drawImage(ovCv, 0, 0);
     }
 
@@ -452,7 +672,7 @@ function render3DBlockCanvas(item, callback) {
     }
 
     drawFace(topCv, {x:64, y:16}, {x:104, y:38}, {x:24, y:38}, 1.0);
-    drawFace(sideCv, {x:24, y:38}, {x:64, y:60}, {x:24, y:84}, 0.82);
+    drawFace(frontCv, {x:24, y:38}, {x:64, y:60}, {x:24, y:84}, 0.82);
     drawFace(sideCv, {x:64, y:60}, {x:104, y:38}, {x:64, y:106}, 0.62);
 
     const dataUrl = cv.toDataURL('image/png');
@@ -460,13 +680,16 @@ function render3DBlockCanvas(item, callback) {
     callback(dataUrl);
   }
 
+  imgFront.onload = onImgLoad;
   imgSide.onload = onImgLoad;
   imgTop.onload = onImgLoad;
   if(overlaySrc) imgOverlay.onload = onImgLoad;
 
-  imgSide.onerror = () => callback(sideSrc);
-  imgTop.onerror = () => callback(sideSrc);
+  imgFront.onerror = () => callback(frontSrc);
+  imgSide.onerror = () => callback(frontSrc);
+  imgTop.onerror = () => callback(frontSrc);
 
+  imgFront.src = frontSrc;
   imgSide.src = sideSrc;
   imgTop.src = topSrc;
   if(overlaySrc) imgOverlay.src = overlaySrc;
