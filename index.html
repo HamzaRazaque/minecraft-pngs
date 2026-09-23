@@ -30,7 +30,6 @@ body{
 .cloud-layer{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden;}
 @keyframes driftCloud{from{transform:translateX(110vw);}to{transform:translateX(-500px);}}
 
-/* TOP AUTHOR BAR */
 .top-author-bar {
   background: rgba(5,8,25,0.95);
   text-align: center;
@@ -107,7 +106,6 @@ nav{position:relative;z-index:50;display:flex;align-items:center;justify-content
 .pill:hover{border-color:var(--yellow);color:var(--yellow);transform:translateY(-1px);}
 .pill.on{border-color:var(--yellow);background:rgba(245,200,66,.15);color:var(--yellow);}
 
-/* SEARCH BAR STYLES */
 .search-box{position:relative;display:flex;align-items:center;margin-bottom:18px;width:100%;}
 .search-input{width:100%;font-family:'VT323',monospace;font-size:1.35rem;padding:12px 40px 12px 42px;
   background:rgba(12,17,45,0.85);border:2px solid var(--card-border);color:var(--yellow);
@@ -162,7 +160,6 @@ footer p{font-family:'VT323',monospace;font-size:1.1rem;color:var(--muted);line-
 <div class="stars" id="stars"></div>
 <div class="cloud-layer" id="clouds"></div>
 
-<!-- Top Author Bar -->
 <div class="top-author-bar">
   Made By Hamza Shaikh
 </div>
@@ -178,7 +175,6 @@ footer p{font-family:'VT323',monospace;font-size:1.1rem;color:var(--muted);line-
 </div>
 
 <div class="wrap">
-  <!-- Search Bar -->
   <div class="search-box">
     <span class="search-icon">🔍</span>
     <input type="text" id="search-input" class="search-input" placeholder="Search Minecraft PNGs (e.g., Diamond, Sword, TNT, Apple)..." oninput="onSearchInput()">
@@ -720,6 +716,7 @@ function makeCard(item, isBlock=false){
   d.className = 'card';
   d.style.setProperty('--ac', item.c);
   const imgTag = `<img src="${imgUrl(item.f)}" alt="${item.name}" loading="lazy" onerror="this.style.opacity='.15'">`;
+
   d.innerHTML = `
     <div class="card-img">
       ${item.n?'<span class="new-tag">NEW</span>':''}
@@ -739,6 +736,7 @@ function makeCard(item, isBlock=false){
   }
 
   d.querySelector('.dl').onclick = () => download(item, isBlock);
+
   return d;
 }
 
