@@ -13,6 +13,17 @@
   --yellow:#f5c842;--cyan:#42e8e0;--purple:#b06ef3;
   --green:#4cffb3;--orange:#ff7f50;--blue:#a8c0ff;
   --text:#d8e0ff;--muted:#8899cc;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+html,body{height:100%;}
+body{
+  font-family:'Press Start 2P',monospace;
+  background:linear-gradient(180deg,var(--sky-top) 0%,var(--sky-mid) 55%,var(--sky-bot) 100%);
+  min-height:100vh;color:var(--text);overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  text-rendering:geometricPrecision;
+  padding-bottom: calc(60px + var(--safe-bottom));
 }
 html,body{height:100%;}
 body{
@@ -107,27 +118,93 @@ nav{position:relative;z-index:50;display:flex;align-items:center;justify-content
 .pills{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;}
 .pill{font-family:'Press Start 2P',monospace;font-size:.6rem;padding:9px 15px;
   border:2px solid var(--card-border);background:rgba(20,26,64,.7);color:var(--muted);
-  cursor:pointer;transition:all .15s ease;letter-spacing:.05em;}
-.pill:hover{border-color:var(--yellow);color:var(--yellow);transform:translateY(-1px);}
+  cursor:pointer;transition:all .15s ease;letter-spacing:.05em;flex-shrink:0;}
+@media (hover: hover) {
+  .pill:hover{border-color:var(--yellow);color:var(--yellow);transform:translateY(-1px);}
+}
+.pill:active{transform:scale(0.96);background:rgba(245,200,66,.25);}
 .pill.on{border-color:var(--yellow);background:rgba(245,200,66,.15);color:var(--yellow);}
 
+/* Sticky Search & Filter Container */
+.sticky-controls {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgba(13, 27, 62, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 12px 0 6px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(100, 120, 255, 0.15);
+  transition: transform 0.3s ease;
+}
+.sticky-controls.hidden-nav {
+  transform: translateY(-110%);
+}
+
+/* Mobile Quick Navigation Dock */
+.mobile-nav-dock {
+  display: none;
+  position: fixed;
+  bottom: calc(12px + var(--safe-bottom));
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 80;
+  background: rgba(10, 14, 45, 0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 2px solid var(--card-border);
+  border-radius: 30px;
+  padding: 6px 14px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  gap: 12px;
+  align-items: center;
+}
+.mobile-dock-btn {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  padding: 4px 6px;
+  transition: all 0.15s ease;
+}
+.mobile-dock-btn img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+.mobile-dock-btn:active {
+  transform: scale(0.9);
+  color: var(--yellow);
+}
 
 /* Scroll to Top Floating Button */
-.scroll-top-btn{position:fixed;bottom:24px;right:24px;width:44px;height:44px;
+.scroll-top-btn{position:fixed;bottom:calc(24px + var(--safe-bottom));right:24px;width:44px;height:44px;
   background:rgba(12,17,45,0.9);border:2px solid var(--yellow);color:var(--yellow);
   font-family:'Press Start 2P',monospace;font-size:1rem;display:flex;align-items:center;
   justify-content:center;cursor:pointer;z-index:90;transition:all .2s ease;
-  opacity:0;pointer-events:none;box-shadow:0 0 16px rgba(0,0,0,0.8);}
+  opacity:0;pointer-events:none;box-shadow:0 0 16px rgba(0,0,0,0.8);border-radius:8px;}
 .scroll-top-btn.show{opacity:1;pointer-events:auto;}
-.scroll-top-btn:hover{background:var(--yellow);color:#0d1b3e;transform:translateY(-3px);}
+@media (hover: hover) {
+  .scroll-top-btn:hover{background:var(--yellow);color:#0d1b3e;transform:translateY(-3px);}
+}
+.scroll-top-btn:active{transform:scale(0.9);}
 
+.search-box{position:relative;margin-bottom:12px;}
 .search-input{width:100%;font-family:'VT323',monospace;font-size:1.35rem;padding:12px 40px 12px 42px;
   background:rgba(12,17,45,0.85);border:2px solid var(--card-border);color:var(--yellow);
   outline:none;transition:border-color .15s,box-shadow .15s;letter-spacing:.05em;}
 .search-input::placeholder{color:var(--muted);font-family:'VT323',monospace;font-size:1.25rem;}
 .search-input:focus{border-color:var(--cyan);box-shadow:0 0 18px rgba(66,232,224,0.3);background:rgba(18,24,60,0.95);}
-.search-icon{position:absolute;left:14px;font-size:1.1rem;pointer-events:none;opacity:0.7;}
-.search-clear{position:absolute;right:14px;background:none;border:none;color:var(--muted);
+.search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:1.1rem;pointer-events:none;opacity:0.7;}
+.search-clear{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--muted);
   font-family:'Press Start 2P',monospace;font-size:.65rem;cursor:pointer;padding:4px;transition:color .12s;}
 .search-clear:hover{color:var(--yellow);}
 .no-results{display:none;text-align:center;padding:40px 20px;background:var(--card-bg);
@@ -138,12 +215,15 @@ nav{position:relative;z-index:50;display:flex;align-items:center;justify-content
 .card{position:relative;background:var(--card-bg);border:2px solid var(--card-border);
   display:flex;flex-direction:column;transition:border-color .15s,background .15s,transform .15s;overflow:hidden;}
 .card::before{content:'';position:absolute;inset:0;border-left:4px solid var(--ac,#f5c842);pointer-events:none;}
-.card:hover{border-color:rgba(160,140,255,.6);background:rgba(28,36,88,.98);transform:translateY(-2px);}
+@media (hover: hover) {
+  .card:hover{border-color:rgba(160,140,255,.6);background:rgba(28,36,88,.98);transform:translateY(-2px);}
+  .card:hover .card-img img{transform:scale(1.12) translateY(-4px);}
+}
+.card:active{transform:scale(0.98);}
 .card-img{padding:18px 12px 12px;display:grid;place-items:center;min-height:144px;
   background:repeating-conic-gradient(#1c2154 0% 25%,#151a44 0% 50%) 0 0/18px 18px;position:relative;}
 .card-img img{width:88px;height:88px;object-fit:contain;image-rendering:pixelated;
   filter:drop-shadow(0 4px 12px rgba(0,0,0,.8));transition:transform .15s;}
-.card:hover .card-img img{transform:scale(1.12) translateY(-4px);}
 
 .new-tag{position:absolute;top:8px;right:8px;background:var(--yellow);color:#1a0800;
   font-size:.48rem;padding:4px 8px;font-family:'Press Start 2P',monospace;font-weight:bold;}
@@ -153,19 +233,56 @@ nav{position:relative;z-index:50;display:flex;align-items:center;justify-content
 .dl{display:flex;align-items:center;justify-content:center;gap:6px;
   border:2px solid var(--ac,#f5c842);color:var(--ac,#f5c842);
   font-family:'Press Start 2P',monospace;font-size:.52rem;padding:10px 10px;
-  cursor:pointer;width:100%;background:transparent;transition:all .12s;letter-spacing:.04em;}
-.dl:hover{background:rgba(245,200,66,.16);transform:scale(1.02);}
+  cursor:pointer;width:100%;background:transparent;transition:all .12s;letter-spacing:.04em;-webkit-tap-highlight-color:transparent;}
+@media (hover: hover) {
+  .dl:hover{background:rgba(245,200,66,.16);transform:scale(1.02);}
+}
+.dl:active{transform:scale(0.95);background:rgba(245,200,66,.3);}
 
 footer{position:relative;z-index:10;border-top:2px solid rgba(100,120,255,.2);
   text-align:center;padding:26px 20px;background:rgba(8,12,40,.65);}
 footer p{font-family:'VT323',monospace;font-size:1.1rem;color:var(--muted);line-height:1.8;}
 
+@media(max-width:768px){
+  .mobile-nav-dock{display:flex;}
+  .scroll-top-btn{right:16px;bottom:calc(74px + var(--safe-bottom));width:38px;height:38px;font-size:.85rem;}
+}
+
 @media(max-width:600px){
-  .grid{grid-template-columns:repeat(2,1fr);}
-  .hero-title{font-size:1.2rem;}
-  .hero-floats img{width:44px;height:44px;}
-  .pill{font-size:.5rem;padding:7px 10px;}
-  .card-name{font-size:.52rem;}
+  .wrap{padding:0 12px 80px;}
+  .hero{padding:28px 12px 18px;}
+  .hero-box{padding:14px 20px 10px;margin-bottom:10px;}
+  .hero-title{font-size:1.25rem;}
+  .hero-badge{font-size:.55rem;padding:6px 14px;}
+  .hero-floats{gap:10px;margin-top:16px;min-height:50px;}
+  .hero-floats img{width:42px;height:42px;}
+  
+  .sticky-controls{padding:8px 0 4px;}
+  .pills{
+    flex-wrap:nowrap;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    padding-bottom:6px;
+    margin-bottom:12px;
+  }
+  .pills::-webkit-scrollbar{display:none;}
+  .pill{font-size:.52rem;padding:8px 12px;}
+
+  .search-input{font-size:1.15rem;padding:10px 36px 10px 36px;}
+  .search-icon{left:10px;font-size:.95rem;}
+
+  .sec-hdr{margin:28px 0 14px;}
+  .sec-hdr h2{font-size:.68rem;}
+  .sec-icon{width:24px;height:24px;}
+
+  .grid{grid-template-columns:repeat(2,1fr);gap:8px;}
+  .card-img{padding:12px 8px 8px;min-height:110px;}
+  .card-img img{width:64px;height:64px;}
+  .card-body{padding:8px 8px 10px;gap:6px;}
+  .card-name{font-size:.5rem;line-height:1.4;}
+  .card-sub{font-size:.9rem;}
+  .dl{font-size:.46rem;padding:8px 6px;}
 }
 </style>
 </head>
@@ -189,19 +306,21 @@ footer p{font-family:'VT323',monospace;font-size:1.1rem;color:var(--muted);line-
 </div>
 
 <div class="wrap">
-  <div class="search-box">
-    <span class="search-icon">🔍</span>
-    <input type="text" id="search-input" class="search-input" placeholder="Search Minecraft PNGs (e.g., Diamond, Sword, TNT, Apple)..." oninput="onSearchInput()">
-    <button id="search-clear" class="search-clear" onclick="clearSearch()" style="display:none;">✕</button>
-  </div>
+  <div class="sticky-controls">
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="search-input" class="search-input" placeholder="Search Minecraft PNGs (e.g., Diamond, Sword, TNT)..." oninput="onSearchInput()">
+      <button id="search-clear" class="search-clear" onclick="clearSearch()" style="display:none;">✕</button>
+    </div>
 
-  <div class="pills">
-    <button class="pill on" onclick="filt('all',this)">All</button>
-    <button class="pill" onclick="filt('blocks',this)">Blocks</button>
-    <button class="pill" onclick="filt('items',this)">Items</button>
-    <button class="pill" onclick="filt('tools',this)">Tools</button>
-    <button class="pill" onclick="filt('food',this)">Food</button>
-    <button class="pill" onclick="filt('armor',this)">Armor</button>
+    <div class="pills">
+      <button class="pill on" onclick="filt('all',this)">All</button>
+      <button class="pill" onclick="filt('blocks',this)">Blocks</button>
+      <button class="pill" onclick="filt('items',this)">Items</button>
+      <button class="pill" onclick="filt('tools',this)">Tools</button>
+      <button class="pill" onclick="filt('food',this)">Food</button>
+      <button class="pill" onclick="filt('armor',this)">Armor</button>
+    </div>
   </div>
 
   <div id="no-results" class="no-results">
@@ -223,6 +342,30 @@ footer p{font-family:'VT323',monospace;font-size:1.1rem;color:var(--muted);line-
 
   <div id="sec-armor" class="sec-hdr"><div class="sec-bar" style="background:var(--blue)"></div><img class="sec-icon" id="si-armor" src="" alt=""><h2>ARMOR</h2><div class="sec-line" style="background:linear-gradient(90deg,rgba(168,192,255,.5),transparent)"></div></div>
   <div class="grid" id="grid-armor"></div>
+</div>
+
+<!-- Mobile Quick Nav Dock -->
+<div class="mobile-nav-dock">
+  <button class="mobile-dock-btn" onclick="scrollToSection('sec-blocks')">
+    <span>🧱</span>
+    <span>Blocks</span>
+  </button>
+  <button class="mobile-dock-btn" onclick="scrollToSection('sec-items')">
+    <span>💎</span>
+    <span>Items</span>
+  </button>
+  <button class="mobile-dock-btn" onclick="scrollToSection('sec-tools')">
+    <span>⚔️</span>
+    <span>Tools</span>
+  </button>
+  <button class="mobile-dock-btn" onclick="scrollToSection('sec-food')">
+    <span>🍎</span>
+    <span>Food</span>
+  </button>
+  <button class="mobile-dock-btn" onclick="scrollToSection('sec-armor')">
+    <span>🛡️</span>
+    <span>Armor</span>
+  </button>
 </div>
 
 <!-- Scroll to top button -->
@@ -899,12 +1042,34 @@ function scrollToTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (el) {
+    const yOffset = -90;
+    const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+    window.scrollTo({ top: y, behavior: 'smooth' });
+  }
+}
+
+let lastScrollY = window.scrollY;
 window.addEventListener('scroll', () => {
   const btn = document.getElementById('scroll-top-btn');
+  const currentScrollY = window.scrollY;
+
   if (btn) {
-    if (window.scrollY > 300) btn.classList.add('show');
+    if (currentScrollY > 300) btn.classList.add('show');
     else btn.classList.remove('show');
   }
+
+  const stickyControls = document.querySelector('.sticky-controls');
+  if (stickyControls) {
+    if (currentScrollY > lastScrollY && currentScrollY > 120) {
+      stickyControls.classList.add('hidden-nav');
+    } else if (currentScrollY < lastScrollY || currentScrollY <= 0) {
+      stickyControls.classList.remove('hidden-nav');
+    }
+  }
+  lastScrollY = currentScrollY;
 });
 
 function render(){
