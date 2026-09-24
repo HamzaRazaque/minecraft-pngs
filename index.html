@@ -43,11 +43,16 @@ body{
   font-family: 'Press Start 2P', monospace;
 }
 
-nav{position:relative;z-index:50;display:flex;align-items:center;justify-content:center;
+nav{position:relative;z-index:50;display:flex;align-items:center;justify-content:space-between;
   padding:0 28px;height:56px;background:rgba(8,12,40,0.85);backdrop-filter:blur(6px);
   border-bottom:2px solid rgba(100,120,255,0.2);}
 .nav-logo{font-family:'Press Start 2P',monospace;font-size:.9rem;color:#e8ecff;text-decoration:none;
   letter-spacing:.06em;text-shadow:0 0 12px rgba(160,140,255,.5);}
+.nav-links{display:flex;gap:12px;}
+.nav-btn{font-family:'Press Start 2P',monospace;font-size:.58rem;color:var(--cyan);text-decoration:none;
+  padding:6px 12px;border:1.5px solid var(--cyan);background:rgba(66,232,224,0.1);
+  transition:all 0.15s ease;cursor:pointer;}
+.nav-btn:hover{background:var(--cyan);color:#0d1b3e;box-shadow:0 0 12px rgba(66,232,224,0.5);}
 
 .hero{position:relative;z-index:10;text-align:center;padding:44px 24px 28px;}
 .hero-box{display:inline-block;border:2px solid rgba(100,100,200,.5);
@@ -106,7 +111,16 @@ nav{position:relative;z-index:50;display:flex;align-items:center;justify-content
 .pill:hover{border-color:var(--yellow);color:var(--yellow);transform:translateY(-1px);}
 .pill.on{border-color:var(--yellow);background:rgba(245,200,66,.15);color:var(--yellow);}
 
-.search-box{position:relative;display:flex;align-items:center;margin-bottom:18px;width:100%;}
+
+/* Scroll to Top Floating Button */
+.scroll-top-btn{position:fixed;bottom:24px;right:24px;width:44px;height:44px;
+  background:rgba(12,17,45,0.9);border:2px solid var(--yellow);color:var(--yellow);
+  font-family:'Press Start 2P',monospace;font-size:1rem;display:flex;align-items:center;
+  justify-content:center;cursor:pointer;z-index:90;transition:all .2s ease;
+  opacity:0;pointer-events:none;box-shadow:0 0 16px rgba(0,0,0,0.8);}
+.scroll-top-btn.show{opacity:1;pointer-events:auto;}
+.scroll-top-btn:hover{background:var(--yellow);color:#0d1b3e;transform:translateY(-3px);}
+
 .search-input{width:100%;font-family:'VT323',monospace;font-size:1.35rem;padding:12px 40px 12px 42px;
   background:rgba(12,17,45,0.85);border:2px solid var(--card-border);color:var(--yellow);
   outline:none;transition:border-color .15s,box-shadow .15s;letter-spacing:.05em;}
@@ -210,6 +224,9 @@ footer p{font-family:'VT323',monospace;font-size:1.1rem;color:var(--muted);line-
   <div id="sec-armor" class="sec-hdr"><div class="sec-bar" style="background:var(--blue)"></div><img class="sec-icon" id="si-armor" src="" alt=""><h2>ARMOR</h2><div class="sec-line" style="background:linear-gradient(90deg,rgba(168,192,255,.5),transparent)"></div></div>
   <div class="grid" id="grid-armor"></div>
 </div>
+
+<!-- Scroll to top button -->
+<button class="scroll-top-btn" id="scroll-top-btn" onclick="scrollToTop()" title="Back to top">↑</button>
 
 <footer>
   <p>Mine-Pngs-----Not an official Minecraft service. Not approved by or associated with Mojang or Microsoft.</p>
@@ -330,6 +347,9 @@ const DATA = {
     {name:'Ochre Froglight',        f:'block/ochre_froglight_side', top:'block/ochre_froglight_top', c:'#f5c842', n:true},
     {name:'Verdant Froglight',      f:'block/verdant_froglight_side', top:'block/verdant_froglight_top', c:'#4cffb3', n:true},
     {name:'Pearlescent Froglight',  f:'block/pearlescent_froglight_side', top:'block/pearlescent_froglight_top', c:'#b06ef3', n:true},
+    {name:'End Rod',                customUrl:'https://minecraft.wiki/images/End_Rod_%28U%29_JE2_BE2.png', f:'block/end_rod', c:'#d8e0ff', flat:true},
+    {name:'Piston',                 f:'block/piston_side',          top:'block/piston_top', c:'#8899cc'},
+    {name:'Sticky Piston',          f:'block/piston_side',          top:'block/piston_top_sticky', c:'#4cffb3'}
   ],
   items:[
     {name:'Diamond',            f:'item/diamond',           c:'#42e8e0'},
@@ -447,19 +467,19 @@ const DATA = {
     {name:'Netherite Axe',      f:'item/netherite_axe',     c:'#b06ef3', n:true},
     {name:'Netherite Shovel',   f:'item/netherite_shovel',  c:'#b06ef3', n:true},
     {name:'Netherite Hoe',      f:'item/netherite_hoe',     c:'#b06ef3', n:true},
-    {name:'Wooden Spear',       f:'item/wooden_spear',      c:'#f5c842', n:true},
-    {name:'Stone Spear',        f:'item/stone_spear',       c:'#8899cc', n:true},
-    {name:'Copper Spear',       f:'item/copper_spear',      c:'#ff7f50', n:true},
-    {name:'Iron Spear',         f:'item/iron_spear',        c:'#d8d8d8', n:true},
-    {name:'Golden Spear',       f:'item/golden_spear',      c:'#f5c842', n:true},
-    {name:'Diamond Spear',      f:'item/diamond_spear',     c:'#42e8e0', n:true},
-    {name:'Netherite Spear',    f:'item/netherite_spear',   c:'#b06ef3', n:true},
+    {name:'Wooden Spear',       customUrl:'https://minecraft.wiki/images/Held_Wooden_Spear_JE2_BE1.png', f:'item/wooden_spear', c:'#f5c842', n:true},
+    {name:'Stone Spear',        customUrl:'https://minecraft.wiki/images/Held_Stone_Spear_JE2_BE1.png', f:'item/stone_spear', c:'#8899cc', n:true},
+    {name:'Copper Spear',       customUrl:'https://minecraft.wiki/images/Held_Copper_Spear_JE2_BE1.png', f:'item/copper_spear', c:'#ff7f50', n:true},
+    {name:'Iron Spear',         customUrl:'https://minecraft.wiki/images/Held_Iron_Spear_JE2_BE1.png', f:'item/iron_spear', c:'#d8d8d8', n:true},
+    {name:'Golden Spear',       customUrl:'https://minecraft.wiki/images/Held_Golden_Spear_JE2_BE1.png', f:'item/golden_spear', c:'#f5c842', n:true},
+    {name:'Diamond Spear',      customUrl:'https://minecraft.wiki/images/Held_Diamond_Spear_JE2_BE1.png', f:'item/diamond_spear', c:'#42e8e0', n:true},
+    {name:'Netherite Spear',    customUrl:'https://minecraft.wiki/images/Held_Netherite_Spear_JE2_BE1.png', f:'item/netherite_spear', c:'#b06ef3', n:true},
     {name:'Bow',                f:'item/bow',               c:'#f5c842'},
     {name:'Crossbow',           f:'item/crossbow_standby',  c:'#f5c842', n:true},
     {name:'Arrow',              f:'item/arrow',             c:'#d8d8d8'},
     {name:'Spectral Arrow',     f:'item/spectral_arrow',    c:'#f5c842'},
     {name:'Trident',            f:'item/trident',           c:'#42e8e0'},
-    {name:'Shield',             f:'item/shield',            c:'#f5c842'},
+    {name:'Shield',             customUrl:'https://minecraft.wiki/images/Shield_JE2_BE1.png', f:'item/shield', c:'#f5c842'},
     {name:'Mace',               f:'item/mace',              c:'#a8c0ff', n:true},
     {name:'Fishing Rod',        f:'item/fishing_rod',       c:'#4cffb3'},
     {name:'Carrot on a Stick',  f:'item/carrot_on_a_stick', c:'#ff7f50'},
@@ -558,7 +578,12 @@ const HERO_FLOATS = [
   {name:'Emerald', f:'item/emerald'}
 ];
 
-function imgUrl(f){ return T + f + '.png'; }
+function imgUrl(item){ 
+  if (typeof item === 'object' && item !== null) {
+    return item.customUrl || (T + item.f + '.png');
+  }
+  return T + item + '.png'; 
+}
 
 function dlIcon(c){
   return `<svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v5.5M2.5 4.5 5 7l2.5-2.5M1 8.5h8" stroke="${c}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
@@ -692,8 +717,8 @@ function render3DBlockCanvas(item, callback) {
 }
 
 async function download(item, isBlock=false){
-  let src = imgUrl(item.f);
-  if(isBlock){
+  let src = imgUrl(item);
+  if(isBlock && !item.customUrl){
     const sideSrc = imgUrl(item.f);
     const topSrc = imgUrl(item.top || item.f);
     const cacheKey = sideSrc + '|' + topSrc + '|' + (item.overlay?imgUrl(item.overlay):'');
@@ -714,8 +739,12 @@ async function download(item, isBlock=false){
 function makeCard(item, isBlock=false){
   const d = document.createElement('div');
   d.className = 'card';
+  d.setAttribute('data-name', item.name);
   d.style.setProperty('--ac', item.c);
-  const imgTag = `<img src="${imgUrl(item.f)}" alt="${item.name}" loading="lazy" onerror="this.style.opacity='.15'">`;
+  const itemImgSrc = imgUrl(item);
+  const imgTag = `<img src="${itemImgSrc}" alt="${item.name}" loading="lazy" onerror="this.style.opacity='.15'">`;
+
+  const is3D = isBlock && !item.flat && !item.customUrl;
 
   d.innerHTML = `
     <div class="card-img">
@@ -724,18 +753,18 @@ function makeCard(item, isBlock=false){
     </div>
     <div class="card-body">
       <div class="card-name">${item.name}</div>
-      <div class="card-sub">${isBlock ? '3D Isometric PNG' : 'Transparent PNG · No BG'}</div>
-      <button class="dl" style="border-color:${item.c};color:${item.c}">${dlIcon(item.c)} Download PNG</button>
+      <div class="card-sub">${is3D ? '3D Isometric PNG' : 'Transparent PNG · No BG'}</div>
+      <button class="dl" style="border-color:${item.c};color:${item.c}">${dlIcon(item.c)} Download</button>
     </div>`;
 
   const imgEl = d.querySelector('.card-img img');
-  if(isBlock){
+  if(is3D){
     render3DBlockCanvas(item, (dataUrl) => {
       imgEl.src = dataUrl;
     });
   }
 
-  d.querySelector('.dl').onclick = () => download(item, isBlock);
+  d.querySelector('.dl').onclick = () => download(item, is3D);
 
   return d;
 }
@@ -823,6 +852,7 @@ function clearSearch(){
 
 function applyFilters(){
   let totalVisible = 0;
+  
   CATS.forEach(c => {
     const isCatMatch = (currentCat === 'all' || currentCat === c || searchQuery !== '');
     const sec = document.getElementById('sec-' + c);
@@ -836,6 +866,7 @@ function applyFilters(){
       const card = cards[idx];
       if (!card) return;
       const matchesSearch = !searchQuery || item.name.toLowerCase().includes(searchQuery);
+
       if (isCatMatch && matchesSearch) {
         card.style.display = '';
         catVisibleCount++;
@@ -863,6 +894,18 @@ function filt(cat, btn){
   currentCat = cat;
   applyFilters();
 }
+
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+window.addEventListener('scroll', () => {
+  const btn = document.getElementById('scroll-top-btn');
+  if (btn) {
+    if (window.scrollY > 300) btn.classList.add('show');
+    else btn.classList.remove('show');
+  }
+});
 
 function render(){
   Object.entries(SECTION_ICONS).forEach(([cat, f]) => {
